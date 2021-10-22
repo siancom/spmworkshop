@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utility/my_constant.dart';
 import 'package:flutter_application_1/widgets/show_image.dart';
@@ -28,9 +26,19 @@ class _AuthenState extends State<Authen> {
             buildImage(size),
             buildUser(size),
             buildPassword(size),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Login'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  width: size * 0.6,
+                  child: ElevatedButton(
+                    style: MyConstant().myButtonStyle(),
+                    onPressed: () {},
+                    child: Text('Login'),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
