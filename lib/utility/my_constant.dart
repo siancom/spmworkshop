@@ -7,9 +7,9 @@ class MyConstant {
 
   static String routeAuthen = '/authen';
   static String routeCreateAccount = '/createAccount';
-  static String routeBuyerService = 'buyerService';
-  static String routeSellerService = 'sellerService';
-  static String routeRiderService = 'riderService';
+  static String routeBuyerService = '/buyerService';
+  static String routeSellerService = '/sellerService';
+  static String routeRiderService = '/riderService';
   //image
   static String image1 = 'images/image1.png';
   static String image2 = 'images/image2.png';
