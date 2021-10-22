@@ -10,6 +10,8 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
+  String? typeUser;
+
   Row buildName(double size) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -54,13 +56,17 @@ class _CreateAccountState extends State<CreateAccount> {
           buildTitle('ข้อมูลทั่วไป'),
           buildName(size),
           buildTitle('ชนิดของUser:'),
+          RadioListTile(
+              value: 'buyer', groupValue: typeUser, onChanged: (value){},
+          )
         ],
       ),
     );
   }
 
   Container buildTitle(String title) {
-    return Container(margin: EdgeInsets.symmetric(vertical: 16),
-      child: ShowTitle(title: title, textStyle: MyConstant().h2Style()));
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 16),
+        child: ShowTitle(title: title, textStyle: MyConstant().h2Style()));
   }
 }
