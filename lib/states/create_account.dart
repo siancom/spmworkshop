@@ -10,7 +10,7 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  String? typeUser;
+  String? typeUser; //กำหนดตัวแปร
 
   Row buildName(double size) {
     return Row(
@@ -42,6 +42,125 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
+Row buildPhone(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 16),
+          width: size * 0.6,
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelStyle: MyConstant().h3Style(),
+              labelText: 'Phone:',
+              prefixIcon: Icon(
+                Icons.phone,
+                color: MyConstant.dark,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.dark),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.ligth),
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  Row buildUser(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 16),
+          width: size * 0.6,
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelStyle: MyConstant().h3Style(),
+              labelText: 'User:',
+              prefixIcon: Icon(
+                Icons.perm_identity,
+                color: MyConstant.dark,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.dark),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.ligth),
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  Row buildAddress(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 16),
+          width: size * 0.6,
+          child: TextFormField(maxLines: 4,
+            decoration: InputDecoration(
+             hintText: 'Address:',
+             hintStyle: MyConstant().h3Style(),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 60),
+                child: Icon(
+                  Icons.home,
+                  color: MyConstant.dark,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.dark),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.ligth),
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+Row buildPassword(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(top: 16),
+          width: size * 0.6,
+          child: TextFormField(
+            decoration: InputDecoration(
+              labelStyle: MyConstant().h3Style(),
+              labelText: 'Password:',
+              prefixIcon: Icon(
+                Icons.lock_clock_outlined,
+                color: MyConstant.dark,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.dark),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: MyConstant.ligth),
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.width;
@@ -50,17 +169,92 @@ class _CreateAccountState extends State<CreateAccount> {
         title: Text('CreateAccount'),
         backgroundColor: MyConstant.primary,
       ),
-      body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          buildTitle('ข้อมูลทั่วไป'),
-          buildName(size),
-          buildTitle('ชนิดของUser:'),
-          RadioListTile(
-              value: 'buyer', groupValue: typeUser, onChanged: (value){},
-          )
-        ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        child: ListView(
+          padding: EdgeInsets.all(16),
+          children: [
+            buildTitle('ข้อมูลทั่วไป'),
+            buildName(size),
+            buildTitle('ชนิดของUser:'),
+            buildRadioSeller(size),
+            buildRadioBuyer(size),
+            buildRadioRider(size),
+            buildTitle('ข้อมูลพื้นฐาน'),
+            buildPhone(size),
+            buildUser(size),buildPassword(size),
+          ],
+        ),
       ),
+    );
+  }
+
+  Row buildRadioBuyer(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: size * 0.6,
+          child: RadioListTile(
+              value: 'buyer',
+              groupValue: typeUser,
+              onChanged: (value) {
+                setState(() {
+                  typeUser = value as String?;
+                });
+              },
+              title: ShowTitle(
+                title: 'ผู้ซื้อ(Buyer)',
+                textStyle: MyConstant().h3Style(),
+              )),
+        ),
+      ],
+    );
+  }
+
+  Row buildRadioSeller(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: size * 0.6,
+          child: RadioListTile(
+              value: 'seller',
+              groupValue: typeUser,
+              onChanged: (value) {
+                setState(() {
+                  typeUser = value as String?;
+                });
+              },
+              title: ShowTitle(
+                title: 'ผู้ขาย(Seller)',
+                textStyle: MyConstant().h3Style(),
+              )),
+        ),
+      ],
+    );
+  }
+
+  Widget buildRadioRider(double size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: size * 0.6,
+          child: RadioListTile(
+              value: 'rider',
+              groupValue: typeUser,
+              onChanged: (value) {
+                setState(() {
+                  typeUser = value as String?;
+                });
+              },
+              title: ShowTitle(
+                title: 'ผู้ส่ง(Rider)',
+                textStyle: MyConstant().h3Style(),
+              )),
+        ),
+      ],
     );
   }
 
